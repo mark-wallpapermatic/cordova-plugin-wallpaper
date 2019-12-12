@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Matrix;
+import android.graphics.RectF;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -96,8 +97,11 @@ public class wallpaper extends CordovaPlugin
 	    float yTranslation = (height - originalHeight * scale) / 2.0f;
 
 	    Matrix transformation = new Matrix();
-	    transformation.postTranslate(xTranslation, yTranslation);
-	    transformation.preScale(scale, scale);
+	    //transformation.postTranslate(xTranslation, yTranslation);
+	    //transformation.preScale(scale, scale);
+		RectF drawableRect = new RectF(0, 0, originalWidth, originalHeight);
+		RectF viewRect = new RectF(0, 0, width, height);
+		transformation.setRectToRect(drawableRect, viewRect, Matrix.ScaleToFit.CENTER);
 
 	    Paint paint = new Paint();
 	    paint.setFilterBitmap(true);
