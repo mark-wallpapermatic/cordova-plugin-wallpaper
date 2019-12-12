@@ -46,7 +46,7 @@ public class wallpaper extends CordovaPlugin
 	public void echo(String image, Boolean base64, Context context)
 	{
 		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(metrics);
 	    int phoneHeight = metrics.heightPixels;
 	    int phoneWidth = metrics.widthPixels;
 
