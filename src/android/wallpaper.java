@@ -85,7 +85,7 @@ public class wallpaper extends CordovaPlugin
 
 	private Bitmap returnBitmap(Bitmap originalImage, int width, int height)
 	{
-		Bitmap background = Bitmap.createBitmap((int)width, (int)height, Config.ARGB_8888);
+		Bitmap background = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
 
 		float originalWidth = originalImage.getWidth();
 		float originalHeight = originalImage.getHeight();
