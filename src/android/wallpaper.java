@@ -29,6 +29,8 @@ public class wallpaper extends CordovaPlugin
 	@Override
 	public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException
 	{
+		context = IS_AT_LEAST_LOLLIPOP ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
+
 		DisplayMetrics metrics = new DisplayMetrics();
 		WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 		wm.getDefaultDisplay().getMetrics(metrics);
@@ -36,7 +38,6 @@ public class wallpaper extends CordovaPlugin
 	    int phoneWidth = metrics.widthPixels;
 		String dimensions = phoneWidth + " x " + phoneHeight;
 
-		context = IS_AT_LEAST_LOLLIPOP ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 		String imgSrc = "";
 		Boolean base64 = false;
 
