@@ -89,9 +89,8 @@ public class wallpaper extends CordovaPlugin
 	{
 	    float scale = (float) desiredHeight / wallpaper.getHeight();
 	    int scaledWidth = (int) (scale * wallpaper.getWidth());
-	    int deviceWidth = SharedHelper.getDeviceWidth(context);
-	    int imageCenterWidth = scaledWidth /2;
-	    int widthToCut = imageCenterWidth - deviceWidth / 2;
+	    int imageCenterWidth = scaledWidth / 2;
+	    int widthToCut = imageCenterWidth - desiredWidth / 2;
 	    int leftWidth = scaledWidth - widthToCut;
 	    Bitmap scaledWallpaper = Bitmap.createScaledBitmap(wallpaper, scaledWidth, desiredHeight, false);
 	    Bitmap croppedWallpaper = Bitmap.createBitmap(
