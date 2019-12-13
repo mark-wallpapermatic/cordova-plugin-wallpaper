@@ -31,13 +31,6 @@ public class wallpaper extends CordovaPlugin
 	{
 		context = IS_AT_LEAST_LOLLIPOP ? cordova.getActivity().getWindow().getContext() : cordova.getActivity().getApplicationContext();
 
-		DisplayMetrics metrics = new DisplayMetrics();
-		WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-		wm.getDefaultDisplay().getMetrics(metrics);
-	    int phoneHeight = metrics.heightPixels;
-	    int phoneWidth = metrics.widthPixels;
-		String dimensions = phoneWidth + " x " + phoneHeight;
-
 		String imgSrc = "";
 		Boolean base64 = false;
 
@@ -47,7 +40,7 @@ public class wallpaper extends CordovaPlugin
 			base64 = args.getBoolean(1);
 			this.echo(imgSrc, base64, context);
 
-			PluginResult pr = new PluginResult(PluginResult.Status.OK, dimensions);
+			PluginResult pr = new PluginResult(PluginResult.Status.OK);
 			pr.setKeepCallback(true);
 			callbackContext.sendPluginResult(pr);
 			return true;
@@ -80,16 +73,35 @@ public class wallpaper extends CordovaPlugin
 			}
 
 			//Bitmap adjusted = returnBitmap(bitmap, phoneWidth, phoneHeight);
-			Bitmap adjusted = scaleCenterCrop(bitmap, phoneWidth, phoneHeight);
+			Bitmap adjusted = centerCropWallpaper(bitmap, phoneWidth, phoneHeight);
 
 			WallpaperManager myWallpaperManager = WallpaperManager.getInstance(context);
-			myWallpaperManager.setBitmap(adjusted);
+			myWallpaperManager.setBitmap(adjusted, null, true, WallpaperManager.FLAG_LOCK);
 		}
 		catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private Bitmap centerCropWallpaper(Bitmap wallpaper, int desiredWidth, int desiredHeight)
+	{
+	    float scale = (float) desiredHeight / wallpaper.getHeight();
+	    int scaledWidth = (int) (scale * wallpaper.getWidth());
+	    int deviceWidth = SharedHelper.getDeviceWidth(context);
+	    int imageCenterWidth = scaledWidth /2;
+	    int widthToCut = imageCenterWidth - deviceWidth / 2;
+	    int leftWidth = scaledWidth - widthToCut;
+	    Bitmap scaledWallpaper = Bitmap.createScaledBitmap(wallpaper, scaledWidth, desiredHeight, false);
+	    Bitmap croppedWallpaper = Bitmap.createBitmap(
+	        scaledWallpaper,
+	        widthToCut,
+	        0,
+	        leftWidth,
+	        desiredHeight
+	    );
+	    return croppedWallpaper;
 	}
 
 	private Bitmap returnBitmap(Bitmap originalImage, int width, int height)
