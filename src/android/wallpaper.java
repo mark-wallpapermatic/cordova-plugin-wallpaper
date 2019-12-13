@@ -84,17 +84,17 @@ public class wallpaper extends CordovaPlugin
 
 	private Bitmap returnBitmap(Bitmap originalImage, int width, int height)
 	{
-	    Bitmap background = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
+	    //Bitmap background = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
 
 	    float originalWidth = originalImage.getWidth();
 	    float originalHeight = originalImage.getHeight();
 
-	    Canvas canvas = new Canvas(background);
-
-	    float scale = width / originalWidth;
-
-	    float xTranslation = 0.0f;
-	    float yTranslation = (height - originalHeight * scale) / 2.0f;
+	    // Canvas canvas = new Canvas(background);
+		//
+	    // float scale = width / originalWidth;
+		//
+	    // float xTranslation = 0.0f;
+	    // float yTranslation = (height - originalHeight * scale) / 2.0f;
 
 	    Matrix transformation = new Matrix();
 	    //transformation.postTranslate(xTranslation, yTranslation);
@@ -103,10 +103,12 @@ public class wallpaper extends CordovaPlugin
 		RectF viewRect = new RectF(0, 0, width, height);
 		transformation.setRectToRect(drawableRect, viewRect, Matrix.ScaleToFit.CENTER);
 
-	    Paint paint = new Paint();
-	    paint.setFilterBitmap(true);
+	    // Paint paint = new Paint();
+	    // paint.setFilterBitmap(true);
+		//
+	    // canvas.drawBitmap(originalImage, transformation, paint);
 
-	    canvas.drawBitmap(originalImage, transformation, paint);
+		Bitmap background = Bitmap.createBitmap(originalImage, 0, 0, originalImage.getWidth(), originalImage.getHeight(), transformation, true);
 
 	    return background;
 	}
