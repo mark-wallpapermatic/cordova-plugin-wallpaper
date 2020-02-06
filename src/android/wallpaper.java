@@ -1,4 +1,4 @@
-package com.wallpapermatic.cordova.plugin;
+package fc.fcstudio;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -76,7 +76,7 @@ public class wallpaper extends CordovaPlugin
 			Bitmap adjusted = centerCropWallpaper(bitmap, phoneWidth, phoneHeight);
 
 			WallpaperManager myWallpaperManager = WallpaperManager.getInstance(context);
-			myWallpaperManager.setBitmap(adjusted, null, true, WallpaperManager.FLAG_LOCK);
+			myWallpaperManager.setBitmap(adjusted);
 		}
 		catch (IOException e)
 		{
