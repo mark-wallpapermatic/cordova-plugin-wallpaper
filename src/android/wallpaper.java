@@ -76,7 +76,7 @@ public class wallpaper extends CordovaPlugin
 			Bitmap adjusted = centerCropWallpaper(bitmap, phoneWidth, phoneHeight);
 
 			WallpaperManager myWallpaperManager = WallpaperManager.getInstance(context);
-			myWallpaperManager.setBitmap(adjusted);
+			myWallpaperManager.setBitmap(adjusted, null, true, WallpaperManager.FLAG_LOCK);
 		}
 		catch (IOException e)
 		{
