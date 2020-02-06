@@ -25,24 +25,24 @@
     <description>Cordova Set Wallpaper Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,wallpaper</keywords>
-    <repo>https://github.com/fbsanches/cordova-plugin-wallpaper</repo>
+    <repo>https://github.com/mark-wallpapermatic/cordova-plugin-wallpaper</repo>
     <issue></issue>
 
     <js-module src="www/wallpaper.js" name="wallpaper">
         <clobbers target="wallpaper" />
     </js-module>
-    
+
     <!-- android -->
     <platform name = "android">
         <config-file target = "res/xml/config.xml" parent = "/*">
             <feature name = "wallpaper" >
-                <param name = "android-package" value = "fc.fcstudio.wallpaper"/>
+                <param name = "android-package" value = "com.wallpapermatic.cordova.plugin.wallpaper"/>
             </feature>
         </config-file>
         <config-file target = "AndroidManifest.xml" parent="/*">
             <uses-permission android:name = "android.permission.SET_WALLPAPER" />
         </config-file>
-        <source-file src = "src/android/wallpaper.java" target-dir = "src/fc/fcstudio" />
+        <source-file src = "src/android/wallpaper.java" target-dir = "src/com/wallpapermatic/cordova/plugin" />
     </platform>
-    
+
 </plugin>
